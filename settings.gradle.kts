@@ -22,5 +22,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Android Playground"
+rootProject.name = "Mobile Computing Playground"
 include(":app")
