@@ -8,6 +8,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,13 +22,12 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.core.net.toUri
 import com.example.mobilecomputingplayground.ui.theme.MobileComputingPlaygroundTheme
 import com.example.myapplication.BluetoothActivity
@@ -41,7 +41,10 @@ class MainActivity : ComponentActivity() {
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
         topText = "Child Activity result " + result.resultCode.toString()
-        Log.i("testerei", result.data.toString())
+        Log.i(
+            "testerei",
+            result.data.toString()
+        )
     }
 
     private var topText by mutableStateOf("Top")
@@ -126,7 +129,8 @@ class MainActivity : ComponentActivity() {
                             }
 
                             Button({
-                                       val myIntent = Intent(
+                                       val myIntent = Intent()
+                                       myIntent.setClass(
                                            this@MainActivity,
                                            ChildActivity::class.java
                                        )
@@ -155,6 +159,13 @@ class MainActivity : ComponentActivity() {
                                 }) {
                                 Text("Open Youtube")
                             }
+
+                            Image(
+                                painterResource(R.drawable.haw_landshut),
+                                contentDescription = "The Logo of the University for applied science, Landshut"
+                            )
+
+
                         }
                     })
             }
