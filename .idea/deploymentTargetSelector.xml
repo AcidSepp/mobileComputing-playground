@@ -35,17 +35,6 @@
         </DropdownSelection>
         <DialogSelection />
       </SelectionState>
-      <SelectionState runConfigName="PokemonActivity (3)">
-        <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2026-09-23T10:35:38.795867090Z">
-          <Target type="DEFAULT_BOOT">
-            <handle>
-              <DeviceId pluginId="LocalEmulator" identifier="path=/home/yannick/.android/avd/Small_Phone.avd" />
-            </handle>
-          </Target>
-        </DropdownSelection>
-        <DialogSelection />
-      </SelectionState>
       <SelectionState runConfigName="PokemonActivity (4)">
         <option name="selectionMode" value="DROPDOWN" />
         <DropdownSelection timestamp="2026-09-23T10:35:38.795867090Z">
@@ -58,6 +47,17 @@
         <DialogSelection />
       </SelectionState>
       <SelectionState runConfigName="PokemonActivity (5)">
+        <option name="selectionMode" value="DROPDOWN" />
+        <DropdownSelection timestamp="2026-09-23T10:35:38.795867090Z">
+          <Target type="DEFAULT_BOOT">
+            <handle>
+              <DeviceId pluginId="LocalEmulator" identifier="path=/home/yannick/.android/avd/Small_Phone.avd" />
+            </handle>
+          </Target>
+        </DropdownSelection>
+        <DialogSelection />
+      </SelectionState>
+      <SelectionState runConfigName="PokemonActivity (1)">
         <option name="selectionMode" value="DROPDOWN" />
         <DropdownSelection timestamp="2026-09-23T10:35:38.795867090Z">
           <Target type="DEFAULT_BOOT">
