@@ -5,7 +5,9 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material3.Text
+import androidx.lifecycle.lifecycleScope
 import com.example.mobilecomputingplayground.ui.theme.MobileComputingPlaygroundTheme
+import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
 import okhttp3.Request
 
@@ -16,7 +18,7 @@ class PokemonActivity : ComponentActivity() {
       savedInstanceState,
     )
 
-    val runnable: Runnable = {
+    lifecycleScope.launch {
       try {
         val okHttpClient = OkHttpClient()
 
@@ -36,23 +38,19 @@ class PokemonActivity : ComponentActivity() {
         val message = execute.body!!.string()
         println(message)
 
-        setContent {
+        this@PokemonActivity.setContent {
           MobileComputingPlaygroundTheme {
             Text(message)
           }
         }
-      } catch (e: SecurityException) {
+      } catch (e: Exception) {
         Log.e(
           "Testerei",
-          "The expected 'SecurityException'",
+          "The expected \"android.os.NetworkOnMainThreadException\"",
           e
         )
       }
     }
-    val myThread = Thread(runnable)
-
-    myThread.start()
-
   }
 
 }
