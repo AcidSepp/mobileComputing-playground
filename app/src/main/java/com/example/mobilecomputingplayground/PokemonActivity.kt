@@ -1,7 +1,7 @@
 package com.example.mobilecomputingplayground
 
 import android.os.Bundle
-import android.os.NetworkOnMainThreadException
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material3.Text
@@ -16,32 +16,43 @@ class PokemonActivity : ComponentActivity() {
       savedInstanceState,
     )
 
-    val okHttpClient = OkHttpClient()
+    val runnable: Runnable = {
+      try {
+        val okHttpClient = OkHttpClient()
 
-    val list = listOf(
-      "treecko",
-      "torchic",
-      "mudkip"
-    )
+        val list = listOf(
+          "treecko",
+          "torchic",
+          "mudkip"
+        )
 
-    val request = Request.Builder().url(
-      "https://pokeapi.co/api/v2/pokemon/${list[0]}"
-    ).build()
+        val request = Request.Builder().url(
+          "https://pokeapi.co/api/v2/pokemon/${list[0]}"
+        ).build()
 
-    try {
-      val execute = okHttpClient.newCall(request).execute()
-      val message = execute.body!!.string()
-      println(message)
+        val execute =
+          okHttpClient.newCall(request).execute()
 
-      setContent {
-        MobileComputingPlaygroundTheme {
-          Text(message)
+        val message = execute.body!!.string()
+        println(message)
+
+        setContent {
+          MobileComputingPlaygroundTheme {
+            Text(message)
+          }
         }
+      } catch (e: SecurityException) {
+        Log.e(
+          "Testerei",
+          "The expected 'SecurityException'",
+          e
+        )
       }
-    } catch (e: NetworkOnMainThreadException) {
-      println("The expected 'NetworkOnMainThreadException' exception!")
-      e.printStackTrace()
     }
+    val myThread = Thread(runnable)
+
+    myThread.start()
+
   }
 
 }
