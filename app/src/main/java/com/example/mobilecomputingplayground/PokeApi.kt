@@ -10,17 +10,10 @@ data class Pokemon(val name: String, val height: String, val weight: String)
 
 class PokeApi {
 
-  suspend fun requestPokemon(): Pokemon {
+  suspend fun requestPokemon(pokemonName: String): Pokemon {
     return withContext(Dispatchers.IO) {
-
-      val list = listOf(
-        "treecko",
-        "torchic",
-        "mudkip"
-      )
-
       val request = Request.Builder().url(
-        "https://pokeapi.co/api/v2/pokemon/${list[0]}"
+        "https://pokeapi.co/api/v2/pokemon/$pokemonName"
       ).build()
 
       val execute = CLIENT.newCall(request).execute()

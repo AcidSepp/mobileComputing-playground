@@ -17,9 +17,9 @@ class PokemonViewModel(val pokeApi: PokeApi = PokeApi()) : ViewModel() {
     )
   )
 
-  fun changeSelectedPokemon(name: String) {
+  fun changeSelectedPokemon(pokemonName: String) {
     viewModelScope.launch {
-      pokemon = pokeApi.requestPokemon()
+      pokemon = pokeApi.requestPokemon(pokemonName)
     }
   }
 
