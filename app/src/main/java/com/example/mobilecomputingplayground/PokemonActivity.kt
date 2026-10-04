@@ -38,9 +38,11 @@ class PokemonActivity : ComponentActivity() {
         val message = execute.body!!.string()
         println(message)
 
-        this@PokemonActivity.setContent {
-          MobileComputingPlaygroundTheme {
-            Text(message)
+        this@PokemonActivity.lifecycleScope.launch {
+          this@PokemonActivity.setContent {
+            MobileComputingPlaygroundTheme {
+              Text(message)
+            }
           }
         }
       } catch (e: Exception) {
