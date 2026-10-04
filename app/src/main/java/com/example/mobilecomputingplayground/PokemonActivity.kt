@@ -39,11 +39,7 @@ class PokemonActivity : ComponentActivity() {
         println(message)
 
         this@PokemonActivity.lifecycleScope.launch {
-          this@PokemonActivity.setContent {
-            MobileComputingPlaygroundTheme {
-              Text(message)
-            }
-          }
+          fillContentWithPokemon(message)
         }
       } catch (e: Exception) {
         Log.e(
@@ -54,4 +50,13 @@ class PokemonActivity : ComponentActivity() {
       }
     }
   }
+
+  private fun fillContentWithPokemon(message: String) {
+    this@PokemonActivity.setContent {
+      MobileComputingPlaygroundTheme {
+        Text(message)
+      }
+    }
+  }
+
 }
