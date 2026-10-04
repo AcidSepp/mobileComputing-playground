@@ -7,6 +7,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.material3.Text
 import androidx.lifecycle.lifecycleScope
 import com.example.mobilecomputingplayground.ui.theme.MobileComputingPlaygroundTheme
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -18,7 +19,7 @@ class PokemonActivity : ComponentActivity() {
       savedInstanceState,
     )
 
-    lifecycleScope.launch {
+    lifecycleScope.launch(Dispatchers.IO) {
       try {
         val okHttpClient = OkHttpClient()
 
@@ -32,8 +33,7 @@ class PokemonActivity : ComponentActivity() {
           "https://pokeapi.co/api/v2/pokemon/${list[0]}"
         ).build()
 
-        val execute =
-          okHttpClient.newCall(request).execute()
+        val execute = okHttpClient.newCall(request).execute()
 
         val message = execute.body!!.string()
         println(message)
@@ -46,11 +46,10 @@ class PokemonActivity : ComponentActivity() {
       } catch (e: Exception) {
         Log.e(
           "Testerei",
-          "The expected \"android.os.NetworkOnMainThreadException\"",
+          "Current Thread: ${Thread.currentThread()}",
           e
         )
       }
     }
   }
-
 }
