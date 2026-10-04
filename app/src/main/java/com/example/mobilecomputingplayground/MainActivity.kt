@@ -36,141 +36,148 @@ import com.example.myapplication.SensorActivity
 
 class MainActivity : ComponentActivity() {
 
-    // In the parent Activity, declared as a property (not inside onClick)
-    private val launcher = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result ->
-        topText = "Child Activity result " + result.resultCode.toString()
-        Log.i(
-            "testerei",
-            result.data.toString()
-        )
+  // In the parent Activity, declared as a property (not inside onClick)
+  private val launcher = registerForActivityResult(
+    ActivityResultContracts.StartActivityForResult()
+  ) { result ->
+    topText = "Child Activity result " + result.resultCode.toString()
+    Log.i(
+      "testerei",
+      result.data.toString()
+    )
+  }
+
+  private var topText by mutableStateOf("Top")
+
+
+  @OptIn(ExperimentalMaterial3Api::class)
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    enableEdgeToEdge()
+
+    val am = getSystemService(ActivityManager::class.java)
+    am.appTasks.forEach { task ->
+      val info = task.taskInfo
+      Log.d(
+        "BackStack",
+        "base=${info!!.baseActivity?.className} " + "top=${info.topActivity?.className} count=${info.numActivities}"
+      )
     }
 
-    private var topText by mutableStateOf("Top")
+    setContent {
+      MobileComputingPlaygroundTheme {
 
-
-    @OptIn(ExperimentalMaterial3Api::class)
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-
-        val am = getSystemService(ActivityManager::class.java)
-        am.appTasks.forEach { task ->
-            val info = task.taskInfo
-            Log.d(
-                "BackStack",
-                "base=${info!!.baseActivity?.className} " + "top=${info.topActivity?.className} count=${info.numActivities}"
+        Scaffold(
+          modifier = Modifier.fillMaxSize(),
+          topBar = {
+            TopAppBar(
+              title = {
+                Text(topText)
+              },
+              colors = TopAppBarDefaults.topAppBarColors(
+                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                titleContentColor = MaterialTheme.colorScheme.primary,
+              ),
             )
-        }
+          },
+          bottomBar = {
+            BottomAppBar {
 
-        setContent {
-            MobileComputingPlaygroundTheme {
-
-                Scaffold(
-                    modifier = Modifier.fillMaxSize(),
-                    topBar = {
-                        TopAppBar(
-                            title = {
-                                Text(topText)
-                            },
-                            colors = TopAppBarDefaults.topAppBarColors(
-                                containerColor = MaterialTheme.colorScheme.primaryContainer,
-                                titleContentColor = MaterialTheme.colorScheme.primary,
-                            ),
-                        )
-                    },
-                    bottomBar = {
-                        BottomAppBar {
-
-                        }
-                    },
-                    content = {
-                        Column(
-                            modifier = Modifier
-                                .padding(it)
-                                .fillMaxWidth(),
-                            verticalArrangement = Arrangement.Center,
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                            Button({
-                                       // https://developer.android.com/training/basics/intents/sending
-                                       Intent(
-                                           Intent.ACTION_VIEW,
-                                           "https://haw-landshut.de".toUri()
-                                       ).also {
-                                           startActivity(it)
-                                       }
-                                   }) {
-                                Text("Open haw-landshut.de")
-                            }
-                            Button({
-                                       val myIntent = Intent(
-                                           this@MainActivity,
-                                           SensorActivity::class.java
-                                       )
-                                       myIntent.putExtra(
-                                           "myKey",
-                                           "some Value"
-                                       )
-                                       this@MainActivity.startActivity(myIntent)
-                                   }) {
-                                Text("Open Sensor Activity")
-                            }
-
-                            Button({
-                                       val myIntent = Intent(
-                                           this@MainActivity,
-                                           BluetoothActivity::class.java
-                                       )
-                                       this@MainActivity.startActivity(myIntent)
-                                   }) {
-                                Text("Open Blue Activity")
-                            }
-
-                            Button({
-                                       val myIntent = Intent()
-                                       myIntent.setClass(
-                                           this@MainActivity,
-                                           ChildActivity::class.java
-                                       )
-                                       launcher.launch(myIntent)
-                                   }) {
-                                Text("Open Child Activity")
-                            }
-
-                            Button({
-                                       val myIntent = Intent(
-                                           this@MainActivity,
-                                           MainActivity::class.java
-                                       )
-                                       this@MainActivity.startActivity(myIntent)
-                                   }) {
-                                Text("Open Main Activity")
-                            }
-
-                            Button(
-                                {
-                                    Intent(Intent.ACTION_MAIN).also {
-                                        it.`package` =
-                                            "com.google.android.youtube"
-                                        startActivity(it)
-                                    }
-                                }) {
-                                Text("Open Youtube")
-                            }
-
-                            Image(
-                                painterResource(R.drawable.haw_landshut),
-                                contentDescription = "The Logo of the University for applied science, Landshut"
-                            )
-
-
-                        }
-                    })
             }
-        }
+          },
+          content = {
+            Column(
+              modifier = Modifier
+                .padding(it)
+                .fillMaxWidth(),
+              verticalArrangement = Arrangement.Center,
+              horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+              Button({
+                       // https://developer.android.com/training/basics/intents/sending
+                       Intent(
+                         Intent.ACTION_VIEW,
+                         "https://haw-landshut.de".toUri()
+                       ).also {
+                         startActivity(it)
+                       }
+                     }) {
+                Text("Open haw-landshut.de")
+              }
+              Button({
+                       val myIntent = Intent(
+                         this@MainActivity,
+                         SensorActivity::class.java
+                       )
+                       myIntent.putExtra(
+                         "myKey",
+                         "some Value"
+                       )
+                       this@MainActivity.startActivity(myIntent)
+                     }) {
+                Text("Open Sensor Activity")
+              }
+              Button({
+                       val myIntent = Intent(
+                         this@MainActivity,
+                         PokemonActivity::class.java
+                       )
+                       this@MainActivity.startActivity(myIntent)
+                     }) {
+                Text("Open Pokemon Activity")
+              }
+              Button({
+                       val myIntent = Intent(
+                         this@MainActivity,
+                         BluetoothActivity::class.java
+                       )
+                       this@MainActivity.startActivity(myIntent)
+                     }) {
+                Text("Open Blue Activity")
+              }
+
+              Button({
+                       val myIntent = Intent()
+                       myIntent.setClass(
+                         this@MainActivity,
+                         ChildActivity::class.java
+                       )
+                       launcher.launch(myIntent)
+                     }) {
+                Text("Open Child Activity")
+              }
+
+              Button({
+                       val myIntent = Intent(
+                         this@MainActivity,
+                         MainActivity::class.java
+                       )
+                       this@MainActivity.startActivity(myIntent)
+                     }) {
+                Text("Open Main Activity")
+              }
+
+              Button(
+                {
+                  Intent(Intent.ACTION_MAIN).also {
+                    it.`package` = "com.google.android.youtube"
+                    startActivity(it)
+                  }
+                }) {
+                Text("Open Youtube")
+              }
+
+              Image(
+                painterResource(R.drawable.haw_landshut),
+                contentDescription = "The Logo of the University for applied science, Landshut"
+              )
+
+
+            }
+          })
+      }
     }
+  }
 }
 
 
