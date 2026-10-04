@@ -4,13 +4,15 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.lifecycle.lifecycleScope
 import com.example.mobilecomputingplayground.ui.theme.MobileComputingPlaygroundTheme
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import okhttp3.OkHttpClient
-import okhttp3.Request
 
 class PokemonActivity : ComponentActivity() {
 
@@ -19,28 +21,12 @@ class PokemonActivity : ComponentActivity() {
       savedInstanceState,
     )
 
-    lifecycleScope.launch(Dispatchers.IO) {
+    val pokeApi = PokeApi()
+
+    lifecycleScope.launch {
       try {
-        val okHttpClient = OkHttpClient()
-
-        val list = listOf(
-          "treecko",
-          "torchic",
-          "mudkip"
-        )
-
-        val request = Request.Builder().url(
-          "https://pokeapi.co/api/v2/pokemon/${list[0]}"
-        ).build()
-
-        val execute = okHttpClient.newCall(request).execute()
-
-        val message = execute.body!!.string()
-        println(message)
-
-        this@PokemonActivity.lifecycleScope.launch {
-          fillContentWithPokemon(message)
-        }
+        val requestedPokemon = pokeApi.requestPokemon()
+        fillContentWithPokemon(requestedPokemon)
       } catch (e: Exception) {
         Log.e(
           "Testerei",
@@ -51,10 +37,19 @@ class PokemonActivity : ComponentActivity() {
     }
   }
 
-  private fun fillContentWithPokemon(message: String) {
+  private fun fillContentWithPokemon(message: Pokemon) {
     this@PokemonActivity.setContent {
       MobileComputingPlaygroundTheme {
-        Text(message)
+        Column(
+          modifier = Modifier
+            .fillMaxWidth(),
+          verticalArrangement = Arrangement.Center,
+          horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+          Text("Name: ${message.name}")
+          Text("Height: ${message.height}")
+          Text("Weight: ${message.weight}")
+        }
       }
     }
   }
