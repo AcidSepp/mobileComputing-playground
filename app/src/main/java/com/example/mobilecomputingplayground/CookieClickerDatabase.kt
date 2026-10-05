@@ -17,11 +17,14 @@ data class CookieClickerScore(
 
 @Dao
 interface UserDao {
-  @Query("SELECT * FROM cookie_clicker_score WHERE uid=:uid")
-  suspend fun getById(uid: Int): List<CookieClickerScore>
+  @Query("SELECT score FROM cookie_clicker_score WHERE uid=:uid")
+  suspend fun getById(uid: Int): Int?
 
   @Upsert
   suspend fun upsert(cookieClickerScores: CookieClickerScore)
+
+  @Query("UPDATE cookie_clicker_score SET score = score + 1 WHERE uid=:uid")
+  suspend fun increment(uid: Int)
 }
 
 @Database(
