@@ -13,42 +13,32 @@ import kotlinx.coroutines.launch
 class CookieViewModel(application: Application) :
   AndroidViewModel(application) {
 
-  private val db = Room.databaseBuilder<AppDatabase>(
+  private val userDao = Room.databaseBuilder<AppDatabase>(
     application,
     "cookie_clicker_score_database"
-  ).setDriver(AndroidSQLiteDriver()).build()
-
-  private val userDao = db.userDao()
-
-  init {
-    viewModelScope.launch {
-      val byId = userDao.getById(1337)
-      if (byId.isEmpty()) {
-        val initialScore = CookieClickerScore(
-          1337,
-          0
-        )
-        userDao.upsert(initialScore)
-        val score = userDao.getById(1337).first()
-        clicks = score.score
-      } else {
-        val score = byId.first()
-        clicks = score.score
-      }
-    }
-  }
+  ).setDriver(AndroidSQLiteDriver()).build().userDao()
 
   var clicks by mutableIntStateOf(0)
     private set
 
+  init {
+    viewModelScope.launch {
+      if (userDao.getById(1337) == null) {
+        userDao.upsert(
+          CookieClickerScore(
+            1337,
+            0
+          )
+        )
+      }
+      clicks = userDao.getById(1337)!!
+    }
+  }
 
   fun increment() {
-    val score = CookieClickerScore(
-      1337,
-      ++clicks
-    )
     viewModelScope.launch {
-      userDao.upsert(score)
+      userDao.increment(1337)
+      clicks = userDao.getById(1337)!!
     }
   }
 
