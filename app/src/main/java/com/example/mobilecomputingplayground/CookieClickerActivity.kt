@@ -19,7 +19,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.example.mobilecomputingplayground.ui.theme.MobileComputingPlaygroundTheme
 
@@ -41,8 +40,7 @@ class CookieClickerActivity : ComponentActivity() {
 }
 
 @Composable
-@Preview
-fun SetCookeClickerActivityContent(clickViewModel: CookieViewModel = CookieViewModel()) {
+fun SetCookeClickerActivityContent(clickViewModel: CookieViewModel) {
   Scaffold(modifier = Modifier.fillMaxSize()) {
     Column(modifier = Modifier.fillMaxSize()) {
       Row {
