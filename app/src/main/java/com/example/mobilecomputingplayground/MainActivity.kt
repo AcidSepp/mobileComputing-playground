@@ -8,13 +8,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -27,12 +24,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.core.net.toUri
 import com.example.mobilecomputingplayground.ui.theme.MobileComputingPlaygroundTheme
-import com.example.myapplication.BluetoothActivity
-import com.example.myapplication.ChildActivity
-import com.example.myapplication.SensorActivity
 
 class MainActivity : ComponentActivity() {
 
@@ -80,16 +73,11 @@ class MainActivity : ComponentActivity() {
               ),
             )
           },
-          bottomBar = {
-            BottomAppBar {
-
-            }
-          },
           content = {
             Column(
               modifier = Modifier
                 .padding(it)
-                .fillMaxWidth(),
+                .fillMaxSize(),
               verticalArrangement = Arrangement.Center,
               horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -167,12 +155,15 @@ class MainActivity : ComponentActivity() {
                 Text("Open Youtube")
               }
 
-              Image(
-                painterResource(R.drawable.haw_landshut),
-                contentDescription = "The Logo of the University for applied science, Landshut"
-              )
-
-
+              Button({
+                       val myIntent = Intent(
+                         this@MainActivity,
+                         CookieClickerActivity::class.java
+                       )
+                       this@MainActivity.startActivity(myIntent)
+                     }) {
+                Text("Open Cookie Clicker Activity")
+              }
             }
           })
       }

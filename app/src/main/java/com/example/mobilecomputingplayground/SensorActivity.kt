@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.mobilecomputingplayground
 
 import android.hardware.Sensor
 import android.hardware.SensorEvent
@@ -106,8 +106,8 @@ class SensorActivity : ComponentActivity() {
     ) {
         Scaffold(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(),
+              .fillMaxSize()
+              .padding(),
             topBar = {
                 TopAppBar(
                     title = {
@@ -136,9 +136,9 @@ class SensorActivity : ComponentActivity() {
                     contentString,
                     fontSize = 30.sp,
                     modifier = Modifier
-                        .padding(it)
-                        .padding(20.dp)
-                        .fillMaxWidth()
+                      .padding(it)
+                      .padding(20.dp)
+                      .fillMaxWidth()
                 )
             })
     }

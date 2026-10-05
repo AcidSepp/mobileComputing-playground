@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.mobilecomputingplayground
 
 import android.Manifest
 import android.bluetooth.BluetoothDevice
@@ -181,7 +181,9 @@ fun BluetoothLayout(
     contentMutableState: MutableState<String> = mutableStateOf("No Devices found"),
 ) {
     Scaffold(
-        modifier = Modifier.fillMaxSize().padding(),
+        modifier = Modifier
+          .fillMaxSize()
+          .padding(),
         topBar = {
             TopAppBar(
                 title = {
@@ -210,9 +212,9 @@ fun BluetoothLayout(
                 contentString,
                 fontSize = 30.sp,
                 modifier = Modifier
-                    .padding(it)
-                    .padding(20.dp)
-                    .fillMaxWidth()
+                  .padding(it)
+                  .padding(20.dp)
+                  .fillMaxWidth()
             )
         })
 }

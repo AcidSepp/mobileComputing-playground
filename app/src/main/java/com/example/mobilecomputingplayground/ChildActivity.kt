@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.mobilecomputingplayground
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -22,11 +22,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.app.NavUtils
@@ -34,7 +31,6 @@ import com.example.mobilecomputingplayground.ui.theme.MobileComputingPlaygroundT
 
 class ChildActivity : ComponentActivity() {
 
-    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -62,13 +58,12 @@ class ChildActivity : ComponentActivity() {
     @Composable
     fun ChildActivityLayout(
         onNavigationItemClicked: () -> Unit = {},
-        contentMutableState: MutableState<String> = mutableStateOf("No Devices found"),
         buttonOnClick: () -> Unit = {},
     ) {
         Scaffold(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(),
+              .fillMaxSize()
+              .padding(),
             topBar = {
                 TopAppBar(
                     title = {
@@ -94,9 +89,9 @@ class ChildActivity : ComponentActivity() {
             content = {
                 Column(
                     modifier = Modifier
-                        .padding(it)
-                        .fillMaxHeight()
-                        .fillMaxWidth(),
+                      .padding(it)
+                      .fillMaxHeight()
+                      .fillMaxWidth(),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
