@@ -24,3 +24,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Mobile Computing Playground"
 include(":app")
+include(":kotlinPlayground")
