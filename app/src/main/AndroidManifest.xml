@@ -67,5 +67,9 @@
       android:name=".CookieClickerActivity"
       android:exported="true"
       android:launchMode="singleInstance" />
+    <activity
+      android:name=".StandardComponentsActivity"
+      android:exported="true"
+      android:launchMode="singleInstance" />
   </application>
 </manifest>
