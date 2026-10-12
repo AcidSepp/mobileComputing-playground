@@ -1,6 +1,7 @@
 plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.kotlin.compose)
+  alias(libs.plugins.ksp)
 }
 
 android {
@@ -51,4 +52,14 @@ dependencies {
   androidTestImplementation(libs.androidx.junit)
   debugImplementation(libs.androidx.compose.ui.test.manifest)
   debugImplementation(libs.androidx.compose.ui.tooling)
+  implementation(libs.compose.material.icons)
+
+  implementation(libs.coil.compose)
+  implementation(libs.coil.network.okhttp)
+
+  // Source: https://mvnrepository.com/artifact/com.google.code.gson/gson
+  implementation(libs.gson)
+
+  implementation(libs.androidx.room3.runtime)
+  ksp(libs.androidx.room3.compiler)
 }
