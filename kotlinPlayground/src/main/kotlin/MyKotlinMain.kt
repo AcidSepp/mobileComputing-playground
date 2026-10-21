@@ -1,7 +1,17 @@
-fun main() {
-  val myJavaClass = MyJavaClass()
-  val myKotlinClass = MyKotlinClass()
+fun myFirstHigherOrderFunction(myFun: (String, String) -> Int): Int {
+  return myFun(
+    "a",
+    "b"
+  )
+}
 
-  IO.println(myJavaClass.javaClass.canonicalName)
-  IO.println(myKotlinClass.javaClass.canonicalName)
+
+
+fun main() {
+
+  val myFirstHigherOrderFunction =
+    myFirstHigherOrderFunction { a: String, b: String -> a.length + b.length }
+
+  println(myFirstHigherOrderFunction)
+
 }
