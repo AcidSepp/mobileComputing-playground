@@ -1,2 +1,2 @@
-class MyKotlinClass {
+class MyKotlinClass(var x: Int) {
 }
