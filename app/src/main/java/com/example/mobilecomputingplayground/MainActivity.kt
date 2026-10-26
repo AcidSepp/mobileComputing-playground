@@ -2,6 +2,7 @@ package com.example.mobilecomputingplayground
 
 import android.app.ActivityManager
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -47,6 +48,11 @@ class MainActivity : ComponentActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     enableEdgeToEdge()
+
+    registerReceiver(
+      MyBroadcastReceiver(),
+      IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED)
+    )
 
     val am = getSystemService(ActivityManager::class.java)
     am.appTasks.forEach { task ->
