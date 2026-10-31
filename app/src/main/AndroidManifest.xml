@@ -71,5 +71,8 @@
       android:name=".StandardComponentsActivity"
       android:exported="true"
       android:launchMode="singleInstance" />
+    <activity
+      android:name="com.example.mobilecomputingplayground.VeryBasicActivity"
+      android:exported="true" />
   </application>
 </manifest>
