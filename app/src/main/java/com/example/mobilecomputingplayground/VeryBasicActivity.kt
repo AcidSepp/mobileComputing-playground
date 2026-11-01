@@ -3,8 +3,9 @@ package com.example.mobilecomputingplayground
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
@@ -21,7 +22,7 @@ class VeryBasicActivity : ComponentActivity() {
     val box4Checked = mutableStateOf(true)
 
     setContent {
-      Column {
+      VeryBasicLayout {
         ClicksCount(
           box1Checked,
           box2Checked,
@@ -31,48 +32,55 @@ class VeryBasicActivity : ComponentActivity() {
       }
     }
   }
-}
 
-@Composable
-fun ClicksCount(
-  box1Checked: MutableState<Boolean>,
-  box2Checked: MutableState<Boolean>,
-  box3Checked: MutableState<Boolean>,
-  box4Checked: MutableState<Boolean>,
-) {
-  var box1CheckedRemembered by remember {
-    box1Checked
-  }
-  Checkbox(
-    box1CheckedRemembered,
-    onCheckedChange = {
-      box1CheckedRemembered = it
-    })
+  @Composable
+  fun ClicksCount(
+    box1Checked: MutableState<Boolean>,
+    box2Checked: MutableState<Boolean>,
+    box3Checked: MutableState<Boolean>,
+    box4Checked: MutableState<Boolean>,
+  ) {
+    var box1CheckedRemembered by remember {
+      box1Checked
+    }
+    var box2CheckedRemembered by remember {
+      box2Checked
+    }
+    var box3CheckedRemembered by remember {
+      box3Checked
+    }
+    var box4CheckedRemembered by remember {
+      box4Checked
+    }
+    Button(onClick = {
+      box1CheckedRemembered = false
+      box2CheckedRemembered = false
+      box3CheckedRemembered = false
+      box4CheckedRemembered = false
+    }) {
+      Text("Uncheck all")
+    }
+    Checkbox(
+      box1CheckedRemembered,
+      onCheckedChange = {
+        box1CheckedRemembered = it
+      })
+    Checkbox(
+      box2CheckedRemembered,
+      onCheckedChange = {
+        box2CheckedRemembered = it
+      })
 
-  var box2CheckedRemembered by remember {
-    box2Checked
-  }
-  Checkbox(
-    box2CheckedRemembered,
-    onCheckedChange = {
-      box2CheckedRemembered = it
-    })
+    Checkbox(
+      box3CheckedRemembered,
+      onCheckedChange = {
+        box3CheckedRemembered = it
+      })
 
-  var box3CheckedRemembered by remember {
-    box3Checked
+    Checkbox(
+      box4CheckedRemembered,
+      onCheckedChange = {
+        box4CheckedRemembered = it
+      })
   }
-  Checkbox(
-    box3CheckedRemembered,
-    onCheckedChange = {
-      box3CheckedRemembered = it
-    })
-
-  var box4CheckedRemembered by remember {
-    box4Checked
-  }
-  Checkbox(
-    box4CheckedRemembered,
-    onCheckedChange = {
-      box4CheckedRemembered = it
-    })
 }
