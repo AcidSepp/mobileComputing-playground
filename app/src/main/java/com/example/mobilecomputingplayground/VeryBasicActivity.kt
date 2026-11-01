@@ -3,84 +3,50 @@ package com.example.mobilecomputingplayground
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 
 class VeryBasicActivity : ComponentActivity() {
+
+  val veryBasicViewModel by viewModels<VeryBasicViewModel>()
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    val box1Checked = mutableStateOf(true)
-    val box2Checked = mutableStateOf(true)
-    val box3Checked = mutableStateOf(true)
-    val box4Checked = mutableStateOf(true)
-
     setContent {
       VeryBasicLayout {
-        ClicksCount(
-          box1Checked,
-          box2Checked,
-          box3Checked,
-          box4Checked
+        VeryBasic(
+          veryBasicViewModel
         )
       }
     }
   }
+}
 
-  @Composable
-  fun ClicksCount(
-    box1Checked: MutableState<Boolean>,
-    box2Checked: MutableState<Boolean>,
-    box3Checked: MutableState<Boolean>,
-    box4Checked: MutableState<Boolean>,
-  ) {
-    var box1CheckedRemembered by remember {
-      box1Checked
-    }
-    var box2CheckedRemembered by remember {
-      box2Checked
-    }
-    var box3CheckedRemembered by remember {
-      box3Checked
-    }
-    var box4CheckedRemembered by remember {
-      box4Checked
-    }
-    Button(onClick = {
-      box1CheckedRemembered = false
-      box2CheckedRemembered = false
-      box3CheckedRemembered = false
-      box4CheckedRemembered = false
-    }) {
-      Text("Uncheck all")
-    }
-    Checkbox(
-      box1CheckedRemembered,
-      onCheckedChange = {
-        box1CheckedRemembered = it
-      })
-    Checkbox(
-      box2CheckedRemembered,
-      onCheckedChange = {
-        box2CheckedRemembered = it
-      })
-
-    Checkbox(
-      box3CheckedRemembered,
-      onCheckedChange = {
-        box3CheckedRemembered = it
-      })
-
-    Checkbox(
-      box4CheckedRemembered,
-      onCheckedChange = {
-        box4CheckedRemembered = it
-      })
+@Composable
+fun VeryBasic(
+  veryBasicViewModel: VeryBasicViewModel,
+) {
+  Button(onClick = {
+    veryBasicViewModel.uncheckAllBoxes()
+  }) {
+    Text("Uncheck all")
   }
+  Checkbox(
+    veryBasicViewModel.box1Checked,
+    onCheckedChange = {
+      veryBasicViewModel.toggleBox1()
+    })
+  Checkbox(
+    veryBasicViewModel.box2Checked,
+    onCheckedChange = {
+      veryBasicViewModel.toggleBox2()
+    })
+  Checkbox(
+    veryBasicViewModel.box3Checked,
+    onCheckedChange = {
+      veryBasicViewModel.toggleBox3()
+    })
 }
