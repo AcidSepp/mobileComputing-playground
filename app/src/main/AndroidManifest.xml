@@ -74,5 +74,11 @@
     <activity
       android:name="com.example.mobilecomputingplayground.VeryBasicActivity"
       android:exported="true" />
+    <activity
+      android:name="com.example.mobilecomputingplayground.BlockingGarbageActivity"
+      android:exported="true" />
+    <activity
+      android:name="com.example.mobilecomputingplayground.threading.ThreadedActivity"
+      android:exported="true" />
   </application>
 </manifest>
