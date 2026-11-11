@@ -26,7 +26,7 @@
       </intent-filter>
     </activity>
     <activity
-      android:name=".SensorActivity"
+      android:name=".sensors.SensorActivity"
       android:exported="true"
       android:parentActivityName=".MainActivity">
       <intent-filter>

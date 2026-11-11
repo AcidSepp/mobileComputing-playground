@@ -26,6 +26,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.core.net.toUri
+import com.example.mobilecomputingplayground.sensors.SensorActivity
 import com.example.mobilecomputingplayground.ui.theme.MobileComputingPlaygroundTheme
 
 class MainActivity : ComponentActivity() {
