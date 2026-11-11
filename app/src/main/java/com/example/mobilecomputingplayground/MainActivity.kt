@@ -3,49 +3,48 @@ package com.example.mobilecomputingplayground
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
+import androidx.compose.material3.Button
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 
 class MainActivity : ComponentActivity() {
 
+  val viewModel: SuperBasicBoringViewModel by viewModels<SuperBasicBoringViewModel>()
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-
-    val mutableStateOfList: MutableState<List<String>> = mutableStateOf(
-      listOf(
-        "a",
-        "b",
-        "c"
-      )
-    )
-
     setContent {
-      ButtonClickDingsi(mutableStateOfList)
+      SwitchClickDingsi(viewModel)
     }
-    Thread({
-             Thread.sleep(3_000)
-             val value = mutableStateOfList.value
-             val result = mutableListOf<String>();
-             result.addAll(value)
-             result.add("hinten was dran und so")
-             mutableStateOfList.value = result.toMutableList()
-           }).start()
   }
 }
 
 @Composable
-fun ButtonClickDingsi(list: MutableState<List<String>>) {
-  var rememberedList by remember {
-    list
-  }
+fun SwitchClickDingsi(superBasicBoringViewModel: SuperBasicBoringViewModel = SuperBasicBoringViewModel()) {
   SuperBasicBoringLayout {
-    for (string in rememberedList) {
-      Text(string)
+    Switch(
+      superBasicBoringViewModel.switch1Enabled,
+      onCheckedChange = {
+        superBasicBoringViewModel.switch1Toggled()
+      })
+    Switch(
+      superBasicBoringViewModel.switch2Enabled,
+      onCheckedChange = {
+        superBasicBoringViewModel.switch2Toggled()
+      })
+    Switch(
+      superBasicBoringViewModel.switch3Enabled,
+      onCheckedChange = {
+        superBasicBoringViewModel.switch3Toggled()
+      })
+    Button(
+      onClick = {
+        superBasicBoringViewModel.uncheckAll()
+      }
+    ) {
+      Text("uncheck all")
     }
   }
 }
