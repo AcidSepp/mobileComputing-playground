@@ -7,6 +7,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Row
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -36,6 +38,26 @@ class CookieClickerActivity : ComponentActivity() {
 @Composable
 fun CookieClickerComponent(clickViewModel: CookieViewModel) {
   val clicks by clickViewModel.clicks.collectAsStateWithLifecycle()
+  val user by clickViewModel.userId.collectAsStateWithLifecycle()
+
+  Row {
+    Button(onClick = {
+      clickViewModel.changeUser(0)
+    }) {
+      Text("User 0")
+    }
+    Button(onClick = {
+      clickViewModel.changeUser(1)
+    }) {
+      Text("User 1")
+    }
+    Button(onClick = {
+      clickViewModel.changeUser(2)
+    }) {
+      Text("User 2")
+    }
+  }
+
   Image(
     painterResource(R.drawable.haw_landshut),
     "HAW Landshut Logo",
@@ -44,5 +66,8 @@ fun CookieClickerComponent(clickViewModel: CookieViewModel) {
     })
   Text(
     "Clicks: $clicks",
+  )
+  Text(
+    "User: $user",
   )
 }
