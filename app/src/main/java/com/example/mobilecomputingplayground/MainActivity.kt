@@ -27,6 +27,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.core.net.toUri
 import com.example.mobilecomputingplayground.sensors.SensorActivity
+import com.example.mobilecomputingplayground.settings.SettingsActivity
 import com.example.mobilecomputingplayground.ui.theme.MobileComputingPlaygroundTheme
 
 class MainActivity : ComponentActivity() {
@@ -170,6 +171,16 @@ class MainActivity : ComponentActivity() {
                        this@MainActivity.startActivity(myIntent)
                      }) {
                 Text("Open Cookie Clicker Activity")
+              }
+
+              Button({
+                       val myIntent = Intent(
+                         this@MainActivity,
+                         SettingsActivity::class.java
+                       )
+                       this@MainActivity.startActivity(myIntent)
+                     }) {
+                Text("Open Settings Activity")
               }
             }
           })
