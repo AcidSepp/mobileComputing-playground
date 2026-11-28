@@ -1,4 +1,4 @@
-package com.example.mobilecomputingplayground
+package com.example.mobilecomputingplayground.cookies
 
 import androidx.room3.ColumnInfo
 import androidx.room3.Dao
@@ -8,6 +8,7 @@ import androidx.room3.PrimaryKey
 import androidx.room3.Query
 import androidx.room3.RoomDatabase
 import androidx.room3.Upsert
+import kotlinx.coroutines.flow.Flow
 
 @Entity(tableName = "cookie_clicker_score")
 data class CookieClickerScore(
@@ -18,7 +19,7 @@ data class CookieClickerScore(
 @Dao
 interface UserDao {
   @Query("SELECT score FROM cookie_clicker_score WHERE uid=:uid")
-  suspend fun getById(uid: Int): Int?
+  fun getById(uid: Int): Flow<Int>
 
   @Upsert
   suspend fun upsert(cookieClickerScores: CookieClickerScore)

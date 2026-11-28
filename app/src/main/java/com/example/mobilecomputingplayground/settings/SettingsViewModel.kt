@@ -1,8 +1,5 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
-
 package com.example.mobilecomputingplayground.settings
 
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,7 +15,7 @@ class SettingsViewModel @Inject constructor(val settingsModel: SettingsModel) :
 
   val volume: StateFlow<Float> = settingsModel.volume.stateIn(
     viewModelScope,
-    SharingStarted.WhileSubscribed(5_000),
+    SharingStarted.WhileSubscribed(),
     1.0f
   )
 

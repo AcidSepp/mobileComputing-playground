@@ -26,6 +26,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.core.net.toUri
+import com.example.mobilecomputingplayground.cookies.CookieClickerActivity
 import com.example.mobilecomputingplayground.sensors.SensorActivity
 import com.example.mobilecomputingplayground.settings.SettingsActivity
 import com.example.mobilecomputingplayground.ui.theme.MobileComputingPlaygroundTheme
@@ -84,8 +85,8 @@ class MainActivity : ComponentActivity() {
           content = {
             Column(
               modifier = Modifier
-                .padding(it)
-                .fillMaxSize(),
+                  .padding(it)
+                  .fillMaxSize(),
               verticalArrangement = Arrangement.Center,
               horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -165,8 +166,8 @@ class MainActivity : ComponentActivity() {
 
               Button({
                        val myIntent = Intent(
-                         this@MainActivity,
-                         CookieClickerActivity::class.java
+                           this@MainActivity,
+                           CookieClickerActivity::class.java
                        )
                        this@MainActivity.startActivity(myIntent)
                      }) {
