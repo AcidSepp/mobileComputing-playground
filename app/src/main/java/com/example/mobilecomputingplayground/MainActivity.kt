@@ -4,14 +4,12 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.material3.Button
-import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 
 class MainActivity : ComponentActivity() {
 
-  val viewModel: ComputationViewModel by viewModels<ComputationViewModel>()
+  val viewModel: PokemonViewModel by viewModels<PokemonViewModel>()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -24,16 +22,8 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun BlockingGarbage(computationViewModel: ComputationViewModel) {
-  Text("${computationViewModel.result}")
-  Button(onClick = {
-    computationViewModel.startComputation()
-  }) {
-    Text("Do Computation")
-  }
-  Checkbox(
-    computationViewModel.checked,
-    onCheckedChange = {
-      computationViewModel.checked = it
-    })
+fun BlockingGarbage(viewModel: PokemonViewModel) {
+  Text("${viewModel.name}")
+  Text("${viewModel.size}")
+  Text("${viewModel.weight}")
 }
